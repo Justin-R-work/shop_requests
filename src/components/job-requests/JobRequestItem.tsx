@@ -11,6 +11,8 @@ import { DeleteConfirmModal } from './DeleteConfirmModal';
 import { CommentSection } from './CommentSection';
 import { generatePDF } from '@/lib/pdf-generator';
 
+type JobStatus = "In Process" | "Needs Revision" | "Complete";
+
 interface JobRequestItemProps {
   request: JobRequest;
   isExpanded: boolean;
@@ -44,8 +46,8 @@ export function JobRequestItem({
   };
 
   const handleStatusChange = async (newStatus: string) => {
-    setLocalStatus(newStatus as any);
-    await updateRequest({ status: newStatus });
+    setLocalStatus(newStatus as JobStatus);
+    await updateRequest({ status: newStatus as JobStatus });
   };
 
   const handleDateCompletedChange = async (newDate: string) => {
